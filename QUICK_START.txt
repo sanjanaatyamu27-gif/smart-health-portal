@@ -1,0 +1,24 @@
+SMART HEALTH PORTAL - FINAL QUICK START
+
+1. KEEP YOUR EXISTING backend .env FILE. DO NOT UPLOAD IT.
+2. Replace your project source with this package. Do NOT delete your backend/.env.
+3. In MySQL Workbench run UPGRADE.sql once.
+4. Terminal 1:
+   cd C:\Users\Sanju\smart-health-portal\src\backend
+   npm install
+   node server.js
+   Expected: MySQL connected successfully and backend on port 5000.
+   If EADDRINUSE appears, DO NOT start a second backend. Use the already-running one.
+5. Terminal 2:
+   cd C:\Users\Sanju\smart-health-portal
+   npm install
+   npm run dev
+6. Open the Local URL printed by Vite (5173 or 5174).
+
+DEMO ORDER
+Login/Register -> BMI -> Calculate & Save -> BMI History -> Pill Reminder -> Enable notifications -> Save reminder -> Chatbot -> send question -> Profile -> verify BMI/Pills/Chatbot/Activity -> OP Queue -> Get My Token -> Doctor Recommendation -> Emergency Helpline -> Health Tips/Diseases/Hospitals/Posters/Feedback.
+
+IMPORTANT
+- Do not change port 5000.
+- Do not paste .env contents into chat.
+- Browser push notifications require localhost, notification permission, and the backend running with valid VAPID keys in backend/.env.

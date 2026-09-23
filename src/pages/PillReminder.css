@@ -1,0 +1,174 @@
+.pill-page {
+  min-height: 100vh;
+  background: #f4f8fc;
+  padding: 50px 20px;
+}
+
+.pill-container {
+  max-width: 900px;
+  margin: auto;
+}
+
+.pill-header {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.pill-icon {
+  font-size: 55px;
+}
+
+.pill-header h1 {
+  font-size: 40px;
+  margin: 10px 0;
+  color: #1e3a5f;
+}
+
+.pill-header p {
+  font-size: 18px;
+  color: #666;
+  max-width: 650px;
+  margin: auto;
+  line-height: 1.6;
+}
+
+.pill-card {
+  background: white;
+  padding: 35px;
+  border-radius: 18px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  margin-bottom: 30px;
+}
+
+.input-group {
+  margin-bottom: 22px;
+}
+
+.input-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.input-group input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 14px;
+  border: 1px solid #d4dce5;
+  border-radius: 10px;
+  font-size: 16px;
+  outline: none;
+}
+
+.input-group input:focus {
+  border-color: #1976d2;
+}
+
+.pill-buttons {
+  display: flex;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.set-reminder-btn,
+.clear-btn {
+  padding: 13px 25px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.set-reminder-btn {
+  background: #1976d2;
+  color: white;
+  flex: 1;
+}
+
+.set-reminder-btn:hover {
+  background: #125ca8;
+}
+
+.clear-btn {
+  background: #e9eef3;
+  color: #333;
+}
+
+.clear-btn:hover {
+  background: #dce3e9;
+}
+
+.reminder-result {
+  background: white;
+  padding: 35px;
+  border-radius: 18px;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  margin-bottom: 30px;
+}
+
+.success-icon {
+  font-size: 45px;
+}
+
+.reminder-result h2 {
+  color: #1e3a5f;
+  margin: 15px 0;
+}
+
+.reminder-result p {
+  font-size: 17px;
+  color: #555;
+}
+
+.reminder-tip {
+  margin-top: 20px;
+  padding: 15px;
+  background: #eef7ff;
+  border-radius: 10px;
+  color: #555;
+  line-height: 1.6;
+}
+
+.pill-info {
+  background: white;
+  padding: 30px;
+  border-radius: 18px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.pill-info h2 {
+  color: #1e3a5f;
+  margin-bottom: 20px;
+}
+
+.tip-list div {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+.tip-list span {
+  color: #1976d2;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.tip-list p {
+  margin: 0;
+  color: #555;
+  line-height: 1.5;
+}
+
+@media (max-width: 600px) {
+  .pill-header h1 {
+    font-size: 32px;
+  }
+
+  .pill-buttons {
+    flex-direction: column;
+  }
+}

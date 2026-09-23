@@ -1,0 +1,159 @@
+.queue-page {
+  min-height: 100vh;
+  background: #f4f8fc;
+  padding: 50px 20px;
+}
+
+.queue-container {
+  max-width: 1100px;
+  margin: auto;
+}
+
+.queue-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.queue-icon {
+  font-size: 55px;
+}
+
+.queue-header h1 {
+  font-size: 40px;
+  color: #1e3a5f;
+  margin: 10px 0;
+}
+
+.queue-header p {
+  color: #666;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.queue-notice {
+  background: #eef7ff;
+  border-left: 5px solid #1976d2;
+  padding: 18px 22px;
+  border-radius: 10px;
+  margin-bottom: 35px;
+}
+
+.queue-notice strong {
+  color: #1976d2;
+}
+
+.queue-notice p {
+  color: #555;
+  margin-bottom: 0;
+  margin-top: 8px;
+}
+
+.clinic-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+}
+
+.clinic-card {
+  background: white;
+  padding: 28px;
+  border-radius: 18px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  transition: 0.3s;
+}
+
+.clinic-card:hover {
+  transform: translateY(-5px);
+}
+
+.clinic-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.clinic-symbol {
+  font-size: 40px;
+}
+
+.queue-status {
+  padding: 6px 13px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.queue-status.low {
+  background: #e8f7ee;
+  color: #16834b;
+}
+
+.queue-status.moderate {
+  background: #fff4df;
+  color: #b26a00;
+}
+
+.clinic-card h2 {
+  color: #1e3a5f;
+  margin: 18px 0 5px;
+}
+
+.doctor-name {
+  color: #777;
+}
+
+.queue-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin: 25px 0;
+}
+
+.queue-details div {
+  background: #f5f8fb;
+  padding: 18px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.queue-details span {
+  display: block;
+  font-size: 25px;
+  margin-bottom: 8px;
+}
+
+.queue-details strong {
+  display: block;
+  font-size: 20px;
+  color: #1976d2;
+}
+
+.queue-details small {
+  color: #666;
+}
+
+.queue-button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 9px;
+  background: #1976d2;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.queue-button:hover {
+  background: #125ca8;
+}
+
+@media (max-width: 700px) {
+  .clinic-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .queue-header h1 {
+    font-size: 32px;
+  }
+}

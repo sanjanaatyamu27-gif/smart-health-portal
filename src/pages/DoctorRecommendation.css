@@ -1,0 +1,274 @@
+.doctor-page {
+  min-height: 100vh;
+  background: #f4f8fc;
+  padding: 50px 20px;
+}
+
+.doctor-container {
+  max-width: 900px;
+  margin: auto;
+}
+
+/* Header */
+
+.doctor-header {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.doctor-main-icon {
+  font-size: 55px;
+}
+
+.doctor-header h1 {
+  font-size: 40px;
+  color: #1e3a5f;
+  margin: 10px 0;
+}
+
+.doctor-header p {
+  max-width: 650px;
+  margin: auto;
+  color: #666;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+/* Input Card */
+
+.doctor-card {
+  background: white;
+  padding: 35px;
+  border-radius: 18px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  margin-bottom: 30px;
+}
+
+.doctor-card label {
+  display: block;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.doctor-card textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 15px;
+  border: 1px solid #d4dce5;
+  border-radius: 10px;
+  font-size: 16px;
+  resize: vertical;
+  outline: none;
+  font-family: inherit;
+}
+
+.doctor-card textarea:focus {
+  border-color: #1976d2;
+}
+
+/* Buttons */
+
+.doctor-buttons {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.recommend-btn,
+.doctor-clear-btn {
+  padding: 13px 25px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.recommend-btn {
+  background: #1976d2;
+  color: white;
+  flex: 1;
+}
+
+.recommend-btn:hover {
+  background: #125ca8;
+}
+
+.doctor-clear-btn {
+  background: #e9eef3;
+  color: #333;
+}
+
+.doctor-clear-btn:hover {
+  background: #dce3e9;
+}
+
+/* Recommendation */
+
+.recommendation-result {
+  background: white;
+  padding: 35px;
+  border-radius: 18px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  margin-bottom: 30px;
+}
+
+.result-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid #e5e5e5;
+  padding-bottom: 15px;
+  margin-bottom: 25px;
+}
+
+.result-title span {
+  font-size: 25px;
+}
+
+.result-title h2 {
+  color: #1e3a5f;
+  margin: 0;
+}
+
+/* Doctor Main Result */
+
+.doctor-result-main {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  background: #f4f8fc;
+  padding: 25px;
+  border-radius: 15px;
+}
+
+.recommendation-icon {
+  font-size: 55px;
+}
+
+.result-label {
+  color: #777;
+  margin: 0 0 5px;
+  font-size: 15px;
+}
+
+.doctor-result-main h3 {
+  color: #1976d2;
+  font-size: 30px;
+  margin: 5px 0;
+}
+
+.specialty-text {
+  color: #555;
+  margin: 5px 0;
+}
+
+/* Why Box */
+
+.recommendation-box,
+.next-step-box {
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.recommendation-box {
+  background: #eef7ff;
+}
+
+.next-step-box {
+  background: #eef9f1;
+}
+
+.recommendation-box h4,
+.next-step-box h4 {
+  margin-top: 0;
+  color: #1e3a5f;
+}
+
+.recommendation-box p,
+.next-step-box p {
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+/* Warning */
+
+.doctor-warning {
+  margin-top: 20px;
+  padding: 18px;
+  background: #fff7e6;
+  border-radius: 10px;
+  color: #805b16;
+  line-height: 1.6;
+}
+
+/* How it works */
+
+.doctor-info {
+  background: white;
+  padding: 30px;
+  border-radius: 18px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.doctor-info h2 {
+  text-align: center;
+  color: #1e3a5f;
+  margin-bottom: 25px;
+}
+
+.doctor-steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.doctor-steps div {
+  background: #f5f8fb;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.doctor-steps span {
+  display: flex;
+  width: 35px;
+  height: 35px;
+  margin: 0 auto 12px;
+  align-items: center;
+  justify-content: center;
+  background: #1976d2;
+  color: white;
+  border-radius: 50%;
+  font-weight: bold;
+}
+
+.doctor-steps p {
+  color: #555;
+  margin: 0;
+}
+
+/* Mobile */
+
+@media (max-width: 700px) {
+
+  .doctor-header h1 {
+    font-size: 32px;
+  }
+
+  .doctor-buttons {
+    flex-direction: column;
+  }
+
+  .doctor-result-main {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .doctor-steps {
+    grid-template-columns: 1fr;
+  }
+}
