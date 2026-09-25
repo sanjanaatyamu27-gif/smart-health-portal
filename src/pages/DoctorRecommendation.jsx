@@ -122,7 +122,7 @@ function DoctorRecommendation() {
 
     setRecommendation(result);
     const u = JSON.parse(localStorage.getItem("user") || "null");
-    if (u) fetch("http://localhost:5000/api/action-logs", { method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({user_id:u.id,action:"Doctor recommendation",details:result.specialty,page:"Doctor Recommendation"}) }).catch(()=>{});
+    if (u) fetch("http://https://smart-health-portal-backend-production.up.railway.app/api/action-logs", { method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({user_id:u.id,action:"Doctor recommendation",details:result.specialty,page:"Doctor Recommendation"}) }).catch(()=>{});
   };
 
   const clearRecommendation = () => {

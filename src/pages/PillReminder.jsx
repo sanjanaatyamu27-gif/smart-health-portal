@@ -1,5 +1,5 @@
 import {useEffect,useState} from "react";
-const API="http://localhost:5000";
+const API="https://smart-health-portal-backend-production.up.railway.app";
 const getUser=()=>{try{return JSON.parse(localStorage.getItem("user"));}catch{return null;}};
 function keyToBytes(base64){const p="=".repeat((4-base64.length%4)%4),b=(base64+p).replace(/-/g,"+").replace(/_/g,"/");const raw=atob(b);return Uint8Array.from([...raw].map(c=>c.charCodeAt(0)));}
 export default function PillReminder(){const u=getUser();const [medicine,setMedicine]=useState("");const [time,setTime]=useState("");const [dosage,setDosage]=useState("");const [reminders,setReminders]=useState([]);const [notice,setNotice]=useState("");

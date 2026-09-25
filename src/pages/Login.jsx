@@ -35,7 +35,7 @@ function Login() {
     try {
 
       const response = await fetch(
-        "http://localhost:5000/api/login",
+        "https://smart-health-portal-backend-production.up.railway.app/api/login",
         {
           method: "POST",
 
@@ -122,7 +122,7 @@ function Login() {
     try {
 
       const response = await fetch(
-        "http://localhost:5000/api/register",
+        "https://smart-health-portal-backend-production.up.railway.app/api/register",
         {
           method: "POST",
 

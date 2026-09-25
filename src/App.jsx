@@ -22,7 +22,7 @@ import Profile from "./pages/Profile";
 
 function App() {
   useEffect(() => {
-  const socket = io("http://localhost:5000");
+  const socket = io("https://smart-health-portal-backend-production.up.railway.app");
 
   socket.on("connect", () => {
     console.log("Connected to real-time server:", socket.id);
