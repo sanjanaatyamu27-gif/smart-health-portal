@@ -1,4 +1,5 @@
 import { useState } from "react";
+import API from "../config";
 
 function Feedback() {
   const [name, setName] = useState("");

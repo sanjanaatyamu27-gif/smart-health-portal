@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
+import API from "../config";
 
-const API="https://smart-health-portal-backend-production.up.railway.app";
 function user(){ try{return JSON.parse(localStorage.getItem("user"));}catch{return null;} }
 export default function BMI(){
  const [height,setHeight]=useState(""); const [weight,setWeight]=useState(""); const [result,setResult]=useState(null); const [history,setHistory]=useState([]); const [message,setMessage]=useState("");

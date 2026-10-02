@@ -1979,6 +1979,19 @@ app.get(
         );
 
 
+
+      const [healthReports] =
+        await db.execute(
+          `
+          SELECT *
+          FROM daily_health_reports
+          WHERE user_id = ?
+          ORDER BY report_date DESC
+          LIMIT 10
+          `,
+          [req.params.user_id]
+        );
+
       res.json({
 
         success: true,
@@ -1992,7 +2005,9 @@ app.get(
 
         logs,
 
-        chats
+        chats,
+
+        healthReports
 
       });
 
@@ -2020,332 +2035,165 @@ app.get(
 
 
 // ============================================================
-// OP QUEUE - JOIN
+// DAILY HEALTH REPORT
 // ============================================================
 
 app.post(
-  "/api/op-queue/join",
+  "/api/daily-health-report",
   async (req, res) => {
-
     try {
-
       const {
-        user_id
+        user_id,
+        water_glasses,
+        sleep_hours,
+        exercise_minutes,
+        healthy_meals
       } = req.body;
 
-
       if (!user_id) {
-
         return res.status(400).json({
-
           success: false,
-
-          message:
-            "User ID required."
-
+          message: "User ID is required."
         });
-
       }
 
+      const water = Math.max(0, Math.min(20, Number(water_glasses) || 0));
+      const sleep = Math.max(0, Math.min(24, Number(sleep_hours) || 0));
+      const exercise = Math.max(0, Math.min(600, Number(exercise_minutes) || 0));
+      const meals = Math.max(0, Math.min(10, Number(healthy_meals) || 0));
 
-      const [active] =
-        await db.execute(
+      const waterScore = Math.min(25, Math.round((water / 8) * 25));
 
-          `
-          SELECT *
-          FROM op_queue
-          WHERE user_id = ?
-            AND status = 'waiting'
-          ORDER BY id DESC
-          LIMIT 1
-          `,
+      let sleepScore = 0;
+      if (sleep >= 7 && sleep <= 9) sleepScore = 25;
+      else if ((sleep >= 6 && sleep < 7) || (sleep > 9 && sleep <= 10)) sleepScore = 20;
+      else if ((sleep >= 5 && sleep < 6) || (sleep > 10 && sleep <= 12)) sleepScore = 15;
+      else if (sleep > 0) sleepScore = 10;
 
-          [
-            user_id
-          ]
-
-        );
-
-
-      if (active.length) {
-
-        return res.json({
-
-          success: true,
-
-          queue:
-            active[0]
-
-        });
-
-      }
-
-
-      const [maxRows] =
-        await db.execute(
-
-          `
-          SELECT
-            COALESCE(
-              MAX(token_number),
-              0
-            ) AS max_token
-
-          FROM op_queue
-
-          WHERE DATE(joined_at) =
-                CURDATE()
-          `
-
-        );
-
-
-      const token =
-        Number(
-          maxRows[0].max_token
-        ) + 1;
-
-
-      const [result] =
-        await db.execute(
-
-          `
-          INSERT INTO op_queue
-          (
-            user_id,
-            token_number,
-            status
-          )
-
-          VALUES (?, ?, 'waiting')
-          `,
-
-          [
-            user_id,
-            token
-          ]
-
-        );
-
-
-      const queue = {
-
-        id:
-          result.insertId,
-
-        user_id,
-
-        token_number:
-          token,
-
-        status:
-          "waiting",
-
-        joined_at:
-          new Date()
-
-      };
-
-
-      io.emit(
-        "queueUpdated",
-        queue
+      const exerciseScore = Math.min(25, Math.round((exercise / 30) * 25));
+      const mealScore = Math.min(25, Math.round((meals / 3) * 25));
+      const healthScore = Math.min(
+        100,
+        waterScore + sleepScore + exerciseScore + mealScore
       );
 
+      // Always generate the report date in India time.
+      const parts = new Intl.DateTimeFormat("en-GB", {
+        timeZone: "Asia/Kolkata",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit"
+      }).formatToParts(new Date());
 
-      res.status(201).json({
-
-        success: true,
-
-        queue
-
-      });
-
-    } catch (error) {
-
-      console.error(
-        "Queue join error:",
-        error.message
-      );
-
-
-      res.status(500).json({
-
-        success: false,
-
-        message:
-          "Could not join queue."
-
-      });
-
-    }
-
-  }
-);
-
-
-// ============================================================
-// OP QUEUE - GET
-// ============================================================
-
-app.get(
-  "/api/op-queue/:user_id",
-  async (req, res) => {
-
-    try {
-
-      const [mine] =
-        await db.execute(
-
-          `
-          SELECT *
-          FROM op_queue
-          WHERE user_id = ?
-            AND status = 'waiting'
-          ORDER BY id DESC
-          LIMIT 1
-          `,
-
-          [
-            req.params.user_id
-          ]
-
-        );
-
-
-      const [waiting] =
-        await db.execute(
-
-          `
-          SELECT
-            COUNT(*) AS count
-          FROM op_queue
-
-          WHERE status = 'waiting'
-            AND DATE(joined_at) =
-                CURDATE()
-          `
-
-        );
-
-
-      const current =
-        Math.max(
-
-          0,
-
-          (
-            mine[0]?.token_number ||
-            1
-          ) - 1
-
-        );
-
-
-      res.json({
-
-        success: true,
-
-        queue:
-          mine[0] || null,
-
-        current_token:
-          current,
-
-        people_waiting:
-          Number(
-            waiting[0].count
-          )
-
-      });
-
-    } catch (error) {
-
-      console.error(
-        "Queue load error:",
-        error
-      );
-
-
-      res.status(500).json({
-
-        success: false,
-
-        message:
-          "Could not load queue."
-
-      });
-
-    }
-
-  }
-);
-
-
-// ============================================================
-// OP QUEUE - LEAVE
-// ============================================================
-
-app.delete(
-  "/api/op-queue/:id",
-  async (req, res) => {
-
-    try {
+      const year = parts.find((part) => part.type === "year").value;
+      const month = parts.find((part) => part.type === "month").value;
+      const day = parts.find((part) => part.type === "day").value;
+      const reportDate = `${year}-${month}-${day}`;
 
       await db.execute(
-
         `
-        UPDATE op_queue
-
-        SET status = 'left'
-
-        WHERE id = ?
+        INSERT INTO daily_health_reports
+        (
+          user_id,
+          report_date,
+          water_glasses,
+          sleep_hours,
+          exercise_minutes,
+          healthy_meals,
+          health_score
+        )
+        VALUES (?, ?, ?, ?, ?, ?, ?)
+        ON DUPLICATE KEY UPDATE
+          water_glasses = VALUES(water_glasses),
+          sleep_hours = VALUES(sleep_hours),
+          exercise_minutes = VALUES(exercise_minutes),
+          healthy_meals = VALUES(healthy_meals),
+          health_score = VALUES(health_score)
         `,
-
         [
-          req.params.id
+          user_id,
+          reportDate,
+          water,
+          sleep,
+          exercise,
+          meals,
+          healthScore
         ]
-
       );
 
-
-      io.emit(
-        "queueUpdated",
-        {
-          id:
-            req.params.id
-        }
+      await db.execute(
+        `
+        INSERT INTO action_logs
+        (
+          user_id,
+          action,
+          details,
+          page
+        )
+        VALUES (?, ?, ?, ?)
+        `,
+        [
+          user_id,
+          "Daily Health Report Updated",
+          `Water: ${water} glasses, Sleep: ${sleep} hours, Exercise: ${exercise} minutes, Healthy meals: ${meals}, Score: ${healthScore}/100`,
+          "/daily-health-report"
+        ]
       );
 
+      const [savedRows] = await db.execute(
+        `
+        SELECT *
+        FROM daily_health_reports
+        WHERE user_id = ?
+          AND report_date = ?
+        LIMIT 1
+        `,
+        [user_id, reportDate]
+      );
 
-      res.json({
-
-        success: true
-
+      res.status(200).json({
+        success: true,
+        message: "Daily health report saved successfully.",
+        report: savedRows[0]
       });
-
     } catch (error) {
-
-      console.error(
-        "Queue leave error:",
-        error
-      );
-
-
+      console.error("Daily health report save error:", error);
       res.status(500).json({
-
         success: false,
-
-        message:
-          "Could not leave queue."
-
+        message: "Could not save daily health report."
       });
-
     }
-
   }
 );
 
+app.get(
+  "/api/daily-health-report/:user_id",
+  async (req, res) => {
+    try {
+      const [rows] = await db.execute(
+        `
+        SELECT *
+        FROM daily_health_reports
+        WHERE user_id = ?
+        ORDER BY report_date DESC
+        LIMIT 30
+        `,
+        [req.params.user_id]
+      );
+
+      res.json({
+        success: true,
+        reports: rows
+      });
+    } catch (error) {
+      console.error("Daily health report load error:", error);
+      res.status(500).json({
+        success: false,
+        message: "Could not load daily health reports."
+      });
+    }
+  }
+);
 
 // ============================================================
 // START SERVER

@@ -16,7 +16,7 @@ SMART HEALTH PORTAL - FINAL QUICK START
 6. Open the Local URL printed by Vite (5173 or 5174).
 
 DEMO ORDER
-Login/Register -> BMI -> Calculate & Save -> BMI History -> Pill Reminder -> Enable notifications -> Save reminder -> Chatbot -> send question -> Profile -> verify BMI/Pills/Chatbot/Activity -> OP Queue -> Get My Token -> Doctor Recommendation -> Emergency Helpline -> Health Tips/Diseases/Hospitals/Posters/Feedback.
+Login/Register -> BMI -> Calculate & Save -> BMI History -> Pill Reminder -> Enable notifications -> Save reminder -> Chatbot -> send question -> Profile -> verify BMI/Pills/Chatbot/Activity -> Doctor Recommendation -> Emergency Helpline -> Health Tips/Diseases/Hospitals/Posters/Feedback.
 
 IMPORTANT
 - Do not change port 5000.

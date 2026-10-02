@@ -237,17 +237,6 @@ function Home() {
             />
 
 
-            {/* OP QUEUE */}
-
-            <ServiceCard
-              icon="🎫"
-              title="OP Queue"
-              description="Check your outpatient queue position and waiting information."
-              link={isLoggedIn ? "/op-queue" : "/login"}
-              button={isLoggedIn ? "Open OP Queue" : "Login to Access"}
-            />
-
-
             {/* DOCTOR */}
 
             <ServiceCard

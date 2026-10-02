@@ -1,8 +1,7 @@
 import { useState } from "react";
 import "./DoctorRecommendation.css";
+import API from "../config";
 
-const API =
-  "https://smart-health-portal-backend-production.up.railway.app";
 
 function DoctorRecommendation() {
   const [symptoms, setSymptoms] = useState("");

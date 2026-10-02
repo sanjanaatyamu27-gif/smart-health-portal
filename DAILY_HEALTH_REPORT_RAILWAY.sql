@@ -1,9 +1,5 @@
-USE smart_health_portal;
+USE railway;
 
--- OP Queue has been removed from this project.
-DROP TABLE IF EXISTS op_queue;
-
--- Daily Health Report migration
 CREATE TABLE IF NOT EXISTS daily_health_reports (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
@@ -18,3 +14,5 @@ CREATE TABLE IF NOT EXISTS daily_health_reports (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     UNIQUE KEY unique_user_report_date (user_id, report_date)
 );
+
+SELECT * FROM daily_health_reports ORDER BY id DESC;

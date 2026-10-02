@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
 import { io } from "socket.io-client";
+import API from "./config";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ProtectedRoute from "./components/ProtectedRoutes";
@@ -16,13 +17,13 @@ import Login from "./pages/Login";
 
 import BMI from "./pages/BMI";
 import PillReminder from "./pages/PillReminder";
-import OPQueue from "./pages/OPQueue";
 import DoctorRecommendation from "./pages/DoctorRecommendation";
 import Profile from "./pages/Profile";
+import DailyHealthReport from "./pages/DailyHealthReport";
 
 function App() {
   useEffect(() => {
-  const socket = io("https://smart-health-portal-backend-production.up.railway.app");
+  const socket = io(API);
 
   socket.on("connect", () => {
     console.log("Connected to real-time server:", socket.id);
@@ -95,15 +96,6 @@ function App() {
         />
 
         <Route
-          path="/op-queue"
-          element={
-            <ProtectedRoute>
-              <OPQueue />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
           path="/doctor-recommendation"
           element={
             <ProtectedRoute>
@@ -118,6 +110,15 @@ function App() {
           element={
             <ProtectedRoute>
               <Profile />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/daily-health-report"
+          element={
+            <ProtectedRoute>
+              <DailyHealthReport />
             </ProtectedRoute>
           }
         />

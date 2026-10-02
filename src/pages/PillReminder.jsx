@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
+import API from "../config";
 
-const API =
-  "https://smart-health-portal-backend-production.up.railway.app";
 
 // ------------------------------------------------------------
 // GET LOGGED-IN USER

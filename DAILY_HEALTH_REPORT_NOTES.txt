@@ -1,0 +1,18 @@
+SMART HEALTH PORTAL - UPDATED
+================================
+
+This package contains the original project plus the Daily Health Report feature.
+
+Main fixes:
+- Added /daily-health-report frontend route and page.
+- Added Daily Health Report POST/GET backend APIs.
+- Daily report date is generated explicitly in Asia/Kolkata time.
+- Added MySQL daily_health_reports schema.
+- OP Queue has been removed from this project; the upgrade migration drops the old op_queue table.
+- Centralized frontend API selection in src/config.js:
+  localhost -> http://localhost:5000
+  deployed site -> Railway backend.
+
+IMPORTANT:
+- Create src/backend/.env from .env.example for local use.
+- Do not commit .env or secrets.
